@@ -38,8 +38,10 @@ python genCarPlate.py 100
 ```
 
 ## how to install
+```
 pip install Wheel
 pip install Pillow
 pip install opencv-python==4.2.0.32
 pip install tornado
 pip install nose
+```
