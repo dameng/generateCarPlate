@@ -1,4 +1,4 @@
-#coding=utf-8
+#-*-coding:utf-8-*-
 
 import argparse
 from PIL import ImageFont
@@ -41,8 +41,10 @@ class GenPlateScene:
             self.img[0:70, base:base+23]= GenCh1(self.fontE, val[i+2])
         return self.img
 
-    def generate(self,text):
-        print(text + " " + str(len(text)))
+    def generate(self,ori_text):
+        print(ori_text + " " + str(len(ori_text)))
+
+        text = ori_text.decode('utf-8')
         
         fg = self.draw(text)   # 得到白底黑字
         # cv2.imwrite('01.jpg', fg)
@@ -68,12 +70,12 @@ class GenPlateScene:
         return com, loc
 
     def gen_batch(self, perSize, outDir):
-
+        self.createDir(outDir)
         for i in range(perSize*31-1):
             outputPath = outDir + str(i // perSize) + "/"
             if (not os.path.exists(outputPath)):
                 os.mkdir(outputPath)
-            plate_str = self.gen_plate_string(i, perSize)
+            plate_str = self.gen_plate_string(i, perSize)            
             img, loc =  self.generate(plate_str)
             if img is None:
                 continue
@@ -81,6 +83,11 @@ class GenPlateScene:
             #with open(outputPath + "/" + plate_str + ".txt", 'w') as obj:
             #    line = ','.join([str(v) for v in loc]) + ',"' + plate_str + '"\n' 
             #    obj.write(line)
+
+    def createDir(self, outDir):
+        isExists=os.path.exists(outDir)        
+        if not isExists:            
+            os.makedirs(outDir)            
 
 def parse_args():
     parser = argparse.ArgumentParser()
