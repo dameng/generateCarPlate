@@ -36,3 +36,10 @@ python genCarPlate.py 100
 --根据自己的训练要求，图像大小即背景照片(Background/)设置为了256*128，按需随意
 --为了使得车牌占比约为80% 设置车牌大小为(220, 70)，按需随意
 ```
+
+## how to install
+pip install Wheel
+pip install Pillow
+pip install opencv-python==4.2.0.32
+pip install tornado
+pip install nose
